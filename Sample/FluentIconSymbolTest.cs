@@ -18,7 +18,15 @@ namespace Sample
         {
             this.Symbol = symbol;
             this.Name = symbol.ToString();
-            this.Glyph = char.ConvertFromUtf32((int)symbol);
+
+            //var glyph = char.ConvertFromUtf32((int)symbol);            
+            var Code = ((int)symbol).ToString("X");
+            var Character = char.ConvertFromUtf32(Convert.ToInt32(Code, 16));
+
+            string CodeGlyph  = "\\u" + Code;
+            string TextGlyph  =  "&#x" + Code + ";";
+
+            this.Glyph = TextGlyph;
         }
         public static string String2Unicode(string source)
         {
